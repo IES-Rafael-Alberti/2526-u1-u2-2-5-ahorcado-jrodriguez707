@@ -36,6 +36,7 @@ def solicitar_palabra():
     # - Convertir a mayúsculas (upper())
 
     palabra = input("¿Cual sera la palabra a adivinar?")
+
     while len(palabra) <= 5 or not palabra.isalpha():
         palabra = input("¿Cual sera la palabra a adivinar?, tiene que tener al menos 5 caracteres y que todos sean letras.")
     return palabra.upper()
@@ -134,26 +135,47 @@ def jugar():
     # - intentos: número de intentos restantes
     # - letras_usadas: lista vacía
     # - juego_terminado: False
+    palabra_oculta = "_" * len(palabra)
+    intentos = INTENTOS_MAXIMOS
+    letras_usadas = []
+    juego_terminado = False
     
     print("Jugador 2: ¡Adivina la palabra!\n")
     
     # TODO: Bucle principal del juego
     # - Mientras haya intentos y el juego no haya terminado:
+    while intentos > 0 and not juego_terminado:
     #   1. Mostrar el estado actual
+        mostrar_estado(palabra_oculta, intentos, letras_usadas)
     #   2. Solicitar una letra
+        letra = solicitar_letra(letras_usadas)
     #   3. Añadir la letra a letras_usadas
+        letras_usadas.append(letra)
     #   4. Si la letra está en la palabra:
+        if letra in palabra:
     #      - Actualizar palabra_oculta
+            palabra_oculta = actualizar_palabra_oculta(palabra, palabra_oculta, letra)
     #      - Mostrar mensaje de acierto
+            print(f"La letra '{letra}' está en la palabra.")
     #      - Si ya no hay '_' en palabra_oculta, el jugador ha ganado
+            if "_" not in palabra_oculta:
+                juego_terminado = True
     #   5. Si la letra NO está en la palabra:
+        else:
     #      - Restar un intento
+            intentos -= 1
     #      - Mostrar mensaje de fallo
+            print(f"La letra '{letra}' no está en la palabra.")
     
     # TODO: Mostrar mensaje final
     # - Si ganó: mostrar felicitación y la palabra
     # - Si perdió: mostrar mensaje de derrota y la palabra correcta
+    print("FIN DE LA PARTIDA")
 
+    if juego_terminado:
+        print(f"Has ganado. La palabra era: {palabra}")
+    else:
+        print(f"Has perdido. La palabra correcta era: {palabra}")
     
 
 def main():
@@ -166,6 +188,9 @@ def main():
     # jugar_otra_vez = input("\n¿Quieres jugar otra vez? (s/n): ")
     # if jugar_otra_vez.lower() == 's':
     #     main()
+    jugar_otra_vez = input("\n¿Quieres jugar otra vez? (s/n): ")
+    if jugar_otra_vez.lower() == "s":
+        main()
 
 
 if __name__ == "__main__":
