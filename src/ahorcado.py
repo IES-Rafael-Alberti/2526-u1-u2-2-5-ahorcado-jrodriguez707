@@ -8,8 +8,8 @@ Práctica de programación que evalúa:
 - Sentencias iterativas
 - Manipulación de strings
 
-Autor: [Nombre del alumno]
-Fecha: [Fecha]
+Autor: [Jesús Rodríguez Rodríguez]
+Fecha: [7/11/2025]
 """
 
 
@@ -34,7 +34,11 @@ def solicitar_palabra():
     # - Verificar que tenga al menos 5 caracteres (len())
     # - Verificar que solo contenga letras (isalpha())
     # - Convertir a mayúsculas (upper())
-    pass
+
+    palabra = input("¿Cual sera la palabra a adivinar?")
+    while len(palabra) <= 5 or not palabra.isalpha():
+        palabra = input("¿Cual sera la palabra a adivinar?, tiene que tener al menos 5 caracteres y que todos sean letras.")
+    return palabra.upper()
 
 
 def solicitar_letra(letras_usadas):
@@ -54,8 +58,11 @@ def solicitar_letra(letras_usadas):
     # - Verificar que sea una letra (isalpha())
     # - Verificar que no esté en letras_usadas (operador 'in')
     # - Convertir a mayúsculas (upper())
-    pass
 
+    letra = input("Dime una letra")
+    while len(letra) != 1 or not letra.isalpha() or letra in letras_usadas:
+        letra = input("Dime una letra")
+    return letra.upper()
 
 def mostrar_estado(palabra_oculta, intentos, letras_usadas):
     """
@@ -70,7 +77,10 @@ def mostrar_estado(palabra_oculta, intentos, letras_usadas):
     # - Imprimir intentos restantes
     # - Imprimir la palabra con espacios entre caracteres
     # - Imprimir las letras usadas
-    pass
+
+    print(f"Intentos restantes:{intentos}")
+    print(palabra_oculta)
+    print(f"Letras usadas:{letras_usadas}")
 
 
 def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
@@ -90,8 +100,18 @@ def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
     # - Usar enumerate() para obtener índice y carácter
     # - Si el carácter coincide con la letra, reemplazar en palabra_oculta
     # - Puedes convertir palabra_oculta a lista, modificar y volver a string
-    pass
+    palabra_oculta_lista = list(palabra_oculta)
 
+    for indice, caracter in enumerate(palabra):
+        if caracter == letra:
+            palabra_oculta_lista[indice] = letra
+
+    # Reconstruimos palabra_oculta sin usar join
+    palabra_oculta = ""
+    for c in palabra_oculta_lista:
+        palabra_oculta += c
+
+    return palabra_oculta
 
 def jugar():
     """
@@ -103,10 +123,11 @@ def jugar():
     INTENTOS_MAXIMOS = 5
     
     # TODO: Solicitar la palabra al jugador 1
-    # palabra = solicitar_palabra()
+    palabra = solicitar_palabra()
+
     
     # TODO: Limpiar la pantalla para que el jugador 2 no vea la palabra
-    # limpiar_pantalla()
+    limpiar_pantalla()
     
     # TODO: Inicializar variables del juego
     # - palabra_oculta: string con guiones bajos (ej: "_ _ _ _ _")
@@ -132,8 +153,8 @@ def jugar():
     # TODO: Mostrar mensaje final
     # - Si ganó: mostrar felicitación y la palabra
     # - Si perdió: mostrar mensaje de derrota y la palabra correcta
-    pass
 
+    
 
 def main():
     """
