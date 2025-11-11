@@ -30,10 +30,6 @@ def solicitar_palabra():
         str: La palabra a adivinar en mayúsculas
     """
     # TODO: Implementar la función
-    # - Usar un bucle while para repetir hasta que la palabra sea válida
-    # - Verificar que tenga al menos 5 caracteres (len())
-    # - Verificar que solo contenga letras (isalpha())
-    # - Convertir a mayúsculas (upper())
 
     palabra = input("¿Cual sera la palabra a adivinar?")
 
@@ -54,11 +50,6 @@ def solicitar_letra(letras_usadas):
         str: La letra introducida en mayúsculas
     """
     # TODO: Implementar la función
-    # - Usar un bucle while para repetir hasta que la letra sea válida
-    # - Verificar que sea solo un carácter (len() == 1)
-    # - Verificar que sea una letra (isalpha())
-    # - Verificar que no esté en letras_usadas (operador 'in')
-    # - Convertir a mayúsculas (upper())
 
     letra = input("Dime una letra")
     while len(letra) != 1 or not letra.isalpha() or letra in letras_usadas:
@@ -75,10 +66,6 @@ def mostrar_estado(palabra_oculta, intentos, letras_usadas):
         letras_usadas (list): Lista de letras ya usadas
     """
     # TODO: Implementar la función
-    # - Imprimir intentos restantes
-    # - Imprimir la palabra con espacios entre caracteres
-    # - Imprimir las letras usadas
-
     print(f"Intentos restantes:{intentos}")
     print(palabra_oculta)
     print(f"Letras usadas:{letras_usadas}")
@@ -97,17 +84,12 @@ def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
         str: La palabra oculta actualizada
     """
     # TODO: Implementar la función
-    # - Recorrer la palabra original con un bucle for
-    # - Usar enumerate() para obtener índice y carácter
-    # - Si el carácter coincide con la letra, reemplazar en palabra_oculta
-    # - Puedes convertir palabra_oculta a lista, modificar y volver a string
     palabra_oculta_lista = list(palabra_oculta)
 
     for indice, caracter in enumerate(palabra):
         if caracter == letra:
             palabra_oculta_lista[indice] = letra
 
-    # Reconstruimos palabra_oculta sin usar join
     palabra_oculta = ""
     for c in palabra_oculta_lista:
         palabra_oculta += c
@@ -131,10 +113,6 @@ def jugar():
     limpiar_pantalla()
     
     # TODO: Inicializar variables del juego
-    # - palabra_oculta: string con guiones bajos (ej: "_ _ _ _ _")
-    # - intentos: número de intentos restantes
-    # - letras_usadas: lista vacía
-    # - juego_terminado: False
     palabra_oculta = "_" * len(palabra)
     intentos = INTENTOS_MAXIMOS
     letras_usadas = []
